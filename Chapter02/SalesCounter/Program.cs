@@ -18,7 +18,7 @@ namespace SalesCounter {
                // Console.WriteLine(Sale.ShopName + "  " + Sale.ProductCategory + "   " + Sale.Amount);
 
                // Console.WriteLine("店名 {0} カテゴリー {1} 売り上げ　{2}", Sale.ShopName, Sale.ProductCategory,
-                                                                                    Sale.Amount);
+                                                                                   // Sale.Amount);
                 Console.WriteLine($"店名:{Sale.ShopName} カテゴリー: {Sale.ProductCategory} 売り上げ:{Sale.Amount}");
             }
         }
