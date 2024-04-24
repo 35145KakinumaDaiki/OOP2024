@@ -9,18 +9,12 @@ namespace SalesCounter {
     internal class Program {
         static void Main(string[] args) {
 
-            //戻り値を受け取る
-            List<Sale> sales = ReadSales(@"C:\Users\infosys\source\repos\OOP2024\Chapter02\SalesCounter\bin\Debug\data\Sales.csv");
-
-
-            //戻り値のコレクションを一件ずつ出力する
-            foreach (Sale Sale in sales) {
-               // Console.WriteLine(Sale.ShopName + "  " + Sale.ProductCategory + "   " + Sale.Amount);
-
-               // Console.WriteLine("店名 {0} カテゴリー {1} 売り上げ　{2}", Sale.ShopName, Sale.ProductCategory,
-                                                                                   // Sale.Amount);
-                Console.WriteLine($"店名:{Sale.ShopName} カテゴリー: {Sale.ProductCategory} 売り上げ:{Sale.Amount}");
+            SalesCounter sales = new SalesCounter(ReadSales("data/sales.csv"));
+            Dictionary<string, int> amountPerStore = sales.GetPerStoreSales();
+            foreach(KeyValuePair<string, int> obj in amountPerStore) {
+                Console.WriteLine("{0} {1}", obj.Key,obj.Value);
             }
+           
         }
 
         //売上データを読み込み、Saleオブジェクトのリストを返す
