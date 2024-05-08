@@ -10,8 +10,8 @@ namespace BallApp {
         public SoccerBall(double xp, double yp) 
             :base(xp, yp, @"Picture\soccer_ball.png") { 
             
-            MoveX = 10;//移動量設定
-            MoveY = 10;
+            MoveX = 22;//移動量設定
+            MoveY = 22;
         }
 
         public override bool Move() {
