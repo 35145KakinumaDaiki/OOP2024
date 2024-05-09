@@ -30,7 +30,7 @@ namespace BallApp {
         public abstract bool Move();
 
 
-
+        public abstract bool Move(Keys direction);
 
 
     }
