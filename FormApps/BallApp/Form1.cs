@@ -33,7 +33,7 @@ namespace BallApp {
             //ball.Move();
             //.Location = new Point((int)ball.PosX, (int)ball.PosY); 
             for (int i = 0; i < balls.Count; i++) {
-                balls[i].Move();
+                balls[i].Move(pbBar, pbs[i]);
                 pbs[i].Location = new Point((int)balls[i].PosX, (int)balls[i].PosY);
 
             }
