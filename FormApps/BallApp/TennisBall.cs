@@ -6,12 +6,21 @@ using System.Threading.Tasks;
 
 namespace BallApp {
     internal class TennisBall : Obj {
+        Random rand = new Random();
+        public static int Count {  get; set; }
 
         public TennisBall(double xp, double yp)
             : base(xp, yp, @"Picture\tennis_ball.png") {
 
-            MoveX = 33;//移動量設定
-            MoveY = 33;
+          
+
+
+
+            MoveX = rand.Next(-24, 24);//移動量設定
+            MoveY = rand.Next(-24, 24);
+
+
+            Count++;
         }
 
         public override bool Move() {
@@ -25,7 +34,7 @@ namespace BallApp {
             if (PosY > 500 || PosY < 0) {
                 MoveY = -MoveY;
             }
-
+            
             return true;
         }
     }

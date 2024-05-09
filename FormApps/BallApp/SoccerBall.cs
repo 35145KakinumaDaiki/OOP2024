@@ -3,15 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Rebar;
 
 namespace BallApp {
     internal class SoccerBall : Obj {
+        Random rand = new Random();
+        public static int Count {  get; set; }
 
         public SoccerBall(double xp, double yp) 
-            :base(xp, yp, @"Picture\soccer_ball.png") { 
+            :base(xp, yp, @"Picture\soccer_ball.png") {
+
             
-            MoveX = 22;//移動量設定
-            MoveY = 22;
+
+            
+
+            MoveX = rand.Next(-24,24);//移動量設定
+            MoveY = rand.Next(-24, 24);
+
+            Count++;
         }
 
         public override bool Move() {
@@ -25,6 +34,7 @@ namespace BallApp {
             if(PosY > 500 || PosY < 0) {
                 MoveY = -MoveY;
             }
+         
 
             return true;
         }
