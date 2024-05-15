@@ -16,7 +16,8 @@ namespace Exercise01 {
 
             // 3.1.2
             Exercise1_2(numbers);
-            Console.WriteLine("-----");
+            numbers.ForEach(s => Console.WriteLine(s / 2.0));
+            Console.WriteLine(numbers);
 
             // 3.1.3
             Exercise1_3(numbers);
