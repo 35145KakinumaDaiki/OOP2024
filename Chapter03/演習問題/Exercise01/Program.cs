@@ -13,18 +13,23 @@ namespace Exercise01 {
             Exercise1_1(numbers);
             var exists = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
             Console.WriteLine(exists);
+            Console.WriteLine("-----");
 
             // 3.1.2
             Exercise1_2(numbers);
             numbers.ForEach(s => Console.WriteLine(s / 2.0));
-            Console.WriteLine(numbers);
+            Console.WriteLine("-----");
 
             // 3.1.3
             Exercise1_3(numbers);
-            Console.WriteLine("-----");
+            IEnumerable<int> query = numbers.Where(s => s >= 50);
+            foreach (var s in query)
+                Console.WriteLine(s);
+                Console.WriteLine("-----");
 
             // 3.1.4
             Exercise1_4(numbers);
+            IEnumerable<int> times = numbers.Select(s => s * 2);
         }
 
 
