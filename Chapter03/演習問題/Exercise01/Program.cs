@@ -11,25 +11,20 @@ namespace Exercise01 {
 
             // 3.1.1
             Exercise1_1(numbers);
-            var exists = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
-            Console.WriteLine(exists);
+            
             Console.WriteLine("-----");
 
             // 3.1.2
             Exercise1_2(numbers);
-            numbers.ForEach(s => Console.WriteLine(s / 2.0));
             Console.WriteLine("-----");
 
             // 3.1.3
             Exercise1_3(numbers);
-            IEnumerable<int> query = numbers.Where(s => s >= 50);
-            foreach (var s in query)
-                Console.WriteLine(s);
-                Console.WriteLine("-----");
+            Console.WriteLine("-----");
 
             // 3.1.4
             Exercise1_4(numbers);
-            IEnumerable<int> times = numbers.Select(s => s * 2);
+            
         }
 
 
@@ -37,19 +32,23 @@ namespace Exercise01 {
 
 
         private static void Exercise1_1(List<int> numbers) {
-            
+            var exists = numbers.Exists(s => s % 8 == 0 || s % 9 == 0);
+            Console.WriteLine(exists);
         }
 
         private static void Exercise1_2(List<int> numbers) {
-            
+           
+            numbers.ForEach(s => Console.WriteLine(s / 2.0));
         }
 
         private static void Exercise1_3(List<int> numbers) {
-            
+            numbers.Where(s => 50 <= s).ToList()
+                                       .ForEach(s => Console.WriteLine(s));
+           
         }
 
         private static void Exercise1_4(List<int> numbers) {
-            
+            numbers.Select(n => n * 2).ToList().ForEach(n => Console.WriteLine(n));
         }
     }
 }
