@@ -22,19 +22,36 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<string> names) {
-            
+            Console.WriteLine("都市名を入力、空行で終了");
+
+            do {
+                //処理入力
+                var line = Console.ReadLine();
+                if (String.IsNullOrEmpty(line))
+                    break;
+                int index = names.FindIndex(s => s == line);
+                Console.WriteLine(index);
+
+
+            } while (true);
         }
 
         private static void Exercise2_2(List<string> names) {
-
+            var count = names.Count(s => s.Contains('o'));
+            Console.WriteLine(count);
         }
 
         private static void Exercise2_3(List<string> names) {
-
+            var selected = names.Where(s => s.Contains('o')).ToArray();
+            foreach(var name in selected)
+                Console.WriteLine(name);
         }
 
         private static void Exercise2_4(List<string> names) {
-           
+            var selected = names.Where(s => s[0] == 'B').Select(s => new { s.Length , s});
+            foreach(var obj in selected) {
+                Console.WriteLine(obj.s + "," + obj.Length);
+            }
         }
     }
 }
