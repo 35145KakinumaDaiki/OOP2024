@@ -27,7 +27,7 @@ namespace Exercise03 {
 
         private static void Exercise3_1(string text) {
             var notnum = text.Count(s => s == ' ');
-            Console.WriteLine("空白数:{0}" , notnum);
+            Console.WriteLine("空白数:{0}", notnum);
         }
 
         private static void Exercise3_2(string text) {
@@ -43,20 +43,26 @@ namespace Exercise03 {
         private static void Exercise3_4(string text) {
             var cw = text.Split(' ').Where(s => s.Length <= 4);
 
-            foreach(var s in cw)
+            foreach (var s in cw)
                 Console.WriteLine(s);
         }
 
         private static void Exercise3_5(string text) {
-           var array = text.Split(' ').ToArray();
+            var array = text.Split(' ').ToArray();
 
             var sb = new StringBuilder();
-            foreach(var word in array) {
+            foreach (var word in array) {
                 sb.Append(word);
                 sb.Append(" ");
             }
             Console.WriteLine(sb);
-            
+
+        }
+        private static void Exercise3_6(string text) {
+            var array = text.Split(new[] {' ',',','-','_'}).ToArray();
+            foreach (var word in array) {
+                Console.WriteLine(word);
+            }
         }
     }
 }
