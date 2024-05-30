@@ -27,16 +27,17 @@ namespace Exercise03 {
 
         private static void Exercise3_1(string text) {
             int notnum = text.Count(s => s == ' ');
-            Console.WriteLine(notnum);
+            Console.WriteLine("空白数:" + notnum);
         }
 
         private static void Exercise3_2(string text) {
             var rep = text.Replace("big", "small");
+            Console.WriteLine(rep);
         }
 
         private static void Exercise3_3(string text) {
-            int word = text.Count(s => s == ' ' + 1);
-            Console.WriteLine(word);
+            int word = text.Count(s => s == ' ') + 1;
+            Console.WriteLine("単語の数:" + word);
         }
 
         private static void Exercise3_4(string text) {
