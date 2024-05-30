@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,15 +26,17 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            
+            int notnum = text.Count(s => s == ' ');
+            Console.WriteLine(notnum);
         }
 
         private static void Exercise3_2(string text) {
-            
+            var rep = text.Replace("big", "small");
         }
 
         private static void Exercise3_3(string text) {
-            
+            int word = text.Count(s => s == ' ' + 1);
+            Console.WriteLine(word);
         }
 
         private static void Exercise3_4(string text) {
