@@ -26,8 +26,8 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_1(string text) {
-            int notnum = text.Count(s => s == ' ');
-            Console.WriteLine("空白数:" + notnum);
+            var notnum = text.Count(s => s == ' ');
+            Console.WriteLine("空白数:{0}" , notnum);
         }
 
         private static void Exercise3_2(string text) {
@@ -36,12 +36,12 @@ namespace Exercise03 {
         }
 
         private static void Exercise3_3(string text) {
-            int word = text.Count(s => s == ' ') + 1;
+            var word = text.Count(s => s == ' ') + 1;
             Console.WriteLine("単語の数:" + word);
         }
 
         private static void Exercise3_4(string text) {
-           
+            var cw = text.Split(' ');
         }
 
         private static void Exercise3_5(string text) {
