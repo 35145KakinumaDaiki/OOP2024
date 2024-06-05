@@ -43,8 +43,8 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_4(int[] numbers) {
-            var sortnum = numbers.OrderBy(x => x).Skip(numbers.Length - 11).Take(3)
-                                                                        .ToList();
+            var sortnum = numbers.OrderBy(x => x).Take(3).ToList();
+                                                                        
 
             sortnum.ForEach(x => Console.WriteLine(x.ToString()));
         }
