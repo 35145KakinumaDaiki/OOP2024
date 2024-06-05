@@ -41,11 +41,15 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var book = 
+            var book = books.Where(s=> s.Title == "ラムダ式とLINQの極意").ToList();
+
+            book.ForEach(x => Console.WriteLine(x.Price + "円:" + x.Pages + "ページ"));
         }
 
         private static void Exercise2_2(List<Book> books) {
-           
+           var book = books.Contains(books.tit).ToString();
+
+            Console.WriteLine(book);
         }
 
         private static void Exercise2_3(List<Book> books) {
