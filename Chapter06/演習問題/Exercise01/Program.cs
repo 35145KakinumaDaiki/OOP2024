@@ -39,13 +39,14 @@ namespace Exercise01 {
         private static void Exercise1_3(int[] numbers) {
             var str = numbers.Select(s => s.ToString()).ToList();
 
-            str.ForEach(x => Console.WriteLine(x.ToString()));      
+            str.ForEach(x => Console.WriteLine(x.ToString()));
         }
 
         private static void Exercise1_4(int[] numbers) {
-            var sortnum = numbers.OrderBy(x => x).Skip(numbers.Length + 3).ToList();
+            var sortnum = numbers.OrderBy(x => x).Skip(numbers.Length - 11).Take(3)
+                                                                        .ToList();
 
-           sortnum.ForEach(x => Console.WriteLine(x.ToString()));
+            sortnum.ForEach(x => Console.WriteLine(x.ToString()));
         }
 
         private static void Exercise1_5(int[] numbers) {
