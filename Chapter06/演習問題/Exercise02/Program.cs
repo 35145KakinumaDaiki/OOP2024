@@ -41,9 +41,11 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_1(List<Book> books) {
-            var book = books.Where(s=> s.Title == "ワンダフル・C#ライフ").ToList();
-
-            book.ForEach(x => Console.WriteLine(x.Price + "円:" + x.Pages + "ページ"));
+            var books2 = books.Where(s=> s.Title == "ワンダフル・C#ライフ");
+            foreach(var book in books2) {
+                Console.WriteLine("{0}円{1}ページ", book.Price,book.Pages);
+            }
+            
         }
 
         private static void Exercise2_2(List<Book> books) {
@@ -58,19 +60,28 @@ namespace Exercise02 {
         }
 
         private static void Exercise2_4(List<Book> books) {
-            
+            var price = books.FirstOrDefault(x => x.Price >= 4000);
+            Console.WriteLine(price.Title);
         }
 
         private static void Exercise2_5(List<Book> books) {
-            
+            var pages = books.Where(b => b.Price < 4000)
+                                    .Max(b => b.Pages);
+            Console.WriteLine(pages);
         }
 
         private static void Exercise2_6(List<Book> books) {
-            
+            var title = books.Where(b => b.Pages >= 400).OrderByDescending(b => b.Price);
+            foreach(var title2 in title) {
+                Console.WriteLine("{0}:{1}円",title2.Title,title2.Price);
+            }
         }
 
         private static void Exercise2_7(List<Book> books) {
-            
+            var serch = books.Where(s => s.Title.Contains("C#")).Where(s => s.Pages <= 500);
+            foreach(var serch2 in serch) {
+                Console.WriteLine(serch2.Title);
+            }
         }
     }
     class Book {
