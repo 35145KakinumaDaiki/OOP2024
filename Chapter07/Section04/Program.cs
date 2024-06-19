@@ -15,10 +15,33 @@ namespace Section04 {
             abbrs.Add("NPT", "核兵器不拡散条約");
 
             //7.2.3(Countの呼び出し)
-            //上のAddメソッドで、2つのオブジェクトを追加しているので、読み込んだ
-
+            //上のAddメソッドで、2つのオブジェクトを追加しているので、読み込んだ単語数+2が、Countの値になる
+            Console.WriteLine(abbrs.Count);
+            Console.WriteLine();
 
             //7.2.3(Removeの呼び出し)
+            if(abbrs.Remove("NPT"))
+                Console.WriteLine(abbrs.Count);
+
+            if (abbrs.Remove("NPT"))
+                Console.WriteLine(abbrs.Count);
+            else
+                Console.WriteLine("削除できません");
+
+            Console.WriteLine();
+            //7.2.4
+            //IEnumerableを実装したので、LINQが使える。
+            foreach(var abbr in abbrs.Where(x => x.Key.Length == 3)) {
+                Console.WriteLine(abbr.Key + "=" + abbr.Value);
+            }
+
+            Console.WriteLine();
+
+
+
+
+
+
 
             // インデクサの利用例
             var names = new[] { "WHO", "FIFA", "NPT", };
