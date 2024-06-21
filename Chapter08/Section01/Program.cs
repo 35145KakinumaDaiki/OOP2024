@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,6 +8,8 @@ using System.Threading.Tasks;
 namespace Section01 {
     internal class Program {
         static void Main(string[] args) {
+            var cultureJp = new CultureInfo("ja-jp", false);
+            cultureJp.DateTimeFormat.Calendar = new JapaneseCalendar();
             Console.WriteLine("生年月日を入力");
             Console.Write("年:");
             int year = int.Parse(Console.ReadLine());
@@ -16,47 +19,18 @@ namespace Section01 {
             int day = int.Parse(Console.ReadLine());
 
             var birthday = new DateTime(year, month, day);
-            DayOfWeek dayOfWeek = birthday.DayOfWeek;
+            //Console.WriteLine("あなたは" + birthday.ToString("ddd") + "曜日に生まれました。");
 
-            if (dayOfWeek == DayOfWeek.Friday) {
-                 Console.WriteLine("あなたは金曜日に生まれました。");
-             } else if (dayOfWeek == DayOfWeek.Monday) {
-                 Console.WriteLine("あなたは月曜日に生まれました。");
-             } else if (dayOfWeek == DayOfWeek.Sunday) {
-                 Console.WriteLine("あなたは日曜日に生まれました。");
-             } else if (dayOfWeek == DayOfWeek.Wednesday) {
-                 Console.WriteLine("あなたは水曜日に生まれました。");
-             } else if (dayOfWeek == DayOfWeek.Tuesday) {
-                 Console.WriteLine("あなたは火曜日に生まれました。");
-             }else if (dayOfWeek == DayOfWeek.Thursday) {
-                 Console.WriteLine("あなたは木曜日に生まれました。");
-             }
+            //あなたは平成○○年○月〇日に生まれました。
+            Console.WriteLine("あなたは" + birthday.ToString("ggy年M月d日",cultureJp) + "に生まれました。");
 
+            //あなたは生まれてから今日で○○○○日目です。
+            var nowDate = DateTime.Today;
+            var totaldays = nowDate.Subtract(birthday) .TotalDays + 1;
 
+            Console.WriteLine("あなたは生まれてから今日で" + totaldays + "日目です。");
 
-
-
-            /*var birthday = new DateTime(2004, 5, 31);
-            DayOfWeek birthdayweek = birthday.DayOfWeek;
-            Console.WriteLine(birthdayweek);*/
-
-
-
-            /* var dt1 = new DateTime(2016, 2, 15);
-             var dt2 = new DateTime(2004, 5, 31, 8, 45, 20);
-             Console.WriteLine(dt1);
-             Console.WriteLine(dt2);
-
-             var today = DateTime.Today;
-             var now = DateTime.Now;
-             Console.WriteLine("Now : {0}" , now);
-
-             var isLeapYear = DateTime.IsLeapYear(2024);
-             if (isLeapYear) {
-                 Console.WriteLine("閏年です");
-             }else {
-                 Console.WriteLine("閏年ではありません");
-             }*/
+          
 
         }
     }
