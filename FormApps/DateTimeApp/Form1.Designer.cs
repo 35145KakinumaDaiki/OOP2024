@@ -88,6 +88,7 @@
             btDayBefore.TabIndex = 5;
             btDayBefore.Text = "日前";
             btDayBefore.UseVisualStyleBackColor = true;
+            btDayBefore.Click += btDayBefore_Click;
             // 
             // btDayafter
             // 
