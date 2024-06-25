@@ -18,7 +18,12 @@ namespace Excercise01 {
         }
 
         private void btEx8_2_Click(object sender, EventArgs e) {
-
+            static DateTime NextDay(DateTime date,DayOfWeek dayOfWeek) {
+                var days = (int)dayOfWeek - (int)(date.DayOfWeek);
+                if (days <= 0)
+                    days += 7;
+                return date.AddDays(days);
+            }
         }
     }
 }
