@@ -10,7 +10,6 @@ namespace Excercise01 {
             var culture = new CultureInfo("ja-JP");
             culture.DateTimeFormat.Calendar = new JapaneseCalendar();
             var datOfweek = culture.DateTimeFormat.GetDayName(date.DayOfWeek);
-            tbDisp.Text = date.ToString("ggyy”NMŒŽd“ú(dddd)", culture);
             tbDisp.Text = date.ToString("yyyy/M/d/ HH:mm" + "\r\n" + "yyyy”NMMŒŽdd“ú HHŽžmm•ªss•b" + "\r\n" + "ggyy”NMŒŽd“ú(dddd)", culture);
             
 
