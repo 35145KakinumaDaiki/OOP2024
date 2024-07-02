@@ -45,7 +45,26 @@ namespace CarReportSystem {
         }
         //指定したメーカーのラジオボタンをセット
         private void setRadioButtonMaker(CarReport.MakerGroup targetMaker) {
-            
+            switch (targetMaker) {
+                case CarReport.MakerGroup.トヨタ:
+                    rbToyota.Checked = true;
+                    break;
+                case CarReport.MakerGroup.日産:
+                    rbNissan.Checked = true;
+                    break;
+                case CarReport.MakerGroup.ホンダ:
+                    rbHonda.Checked = true;
+                    break;
+                case CarReport.MakerGroup.スバル:
+                    rbSubaru.Checked = true;
+                    break;
+                case CarReport.MakerGroup.輸入車:
+                    rbImport.Checked = true;
+                    break;
+                case CarReport.MakerGroup.その他:
+                    rbOther.Checked = true;
+                    break;
+            }
         }
 
 
@@ -60,16 +79,36 @@ namespace CarReportSystem {
         }
 
         private void Form1_Load(object sender, EventArgs e) {
-            //dgvCarreport.Columns["Picture"].Visible = false;//画像表示しない
+            dgvCarreport.Columns["Picture"].Visible = false;//画像表示しない
         }
 
         private void dgvCarreport_Click(object sender, EventArgs e) {
+            if (dgvCarreport.Rows.Count == 0) return;
             dtpDate.Value = (DateTime)dgvCarreport.CurrentRow.Cells["Date"].Value;
             cbAuthor.Text = (string)dgvCarreport.CurrentRow.Cells["Author"].Value;
-
+            setRadioButtonMaker((CarReport.MakerGroup)dgvCarreport.CurrentRow.Cells["Maker"].Value);
             cbCarname.Text = (string)dgvCarreport.CurrentRow.Cells["Carname"].Value;
             tbReport.Text = (string)dgvCarreport.CurrentRow.Cells["Report"].Value;
-            pbPicture.Image = (Image)dgvCarreport.CurrentRow.Cells["Picture"].Value;
+            pbPicture.Image = (Image?)dgvCarreport.CurrentRow.Cells["Picture"].Value;
+        }
+
+        private void btDeleteReport_Click(object sender, EventArgs e) {
+            listCarReports.RemoveAt(dgvCarreport.CurrentRow.Index);
+            
+        }
+
+        private void btModifyReport_Click(object sender, EventArgs e) {
+            listCarReports[dgvCarreport.CurrentRow.Index] = new CarReport {
+                Date = dtpDate.Value,
+                Author = cbAuthor.Text,
+                Maker = GetRadioButtonMaker(),
+                CarName = cbCarname.Text,
+                Report = tbReport.Text,
+                Picture = pbPicture.Image,
+
+                
+            };
+            dgvCarreport.Refresh();//データグリットビューの変更          
         }
     }
 }

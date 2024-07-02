@@ -84,7 +84,7 @@
             label2.TabIndex = 0;
             label2.Text = "記録者";
             // 
-            // cbAuther
+            // cbAuthor
             // 
             cbAuthor.Font = new Font("Yu Gothic UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point, 128);
             cbAuthor.FormattingEnabled = true;
@@ -278,6 +278,7 @@
             btModifyReport.TabIndex = 6;
             btModifyReport.Text = "修正";
             btModifyReport.UseVisualStyleBackColor = true;
+            btModifyReport.Click += btModifyReport_Click;
             // 
             // btDeleteReport
             // 
@@ -287,6 +288,7 @@
             btDeleteReport.TabIndex = 6;
             btDeleteReport.Text = "削除";
             btDeleteReport.UseVisualStyleBackColor = true;
+            btDeleteReport.Click += btDeleteReport_Click;
             // 
             // label7
             // 
