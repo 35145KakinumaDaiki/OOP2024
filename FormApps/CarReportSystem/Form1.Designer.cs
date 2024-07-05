@@ -154,10 +154,12 @@
             // rbOther
             // 
             rbOther.AutoSize = true;
+            rbOther.Checked = true;
             rbOther.Location = new Point(307, 15);
             rbOther.Name = "rbOther";
             rbOther.Size = new Size(56, 19);
             rbOther.TabIndex = 0;
+            rbOther.TabStop = true;
             rbOther.Text = "その他";
             rbOther.UseVisualStyleBackColor = true;
             // 
@@ -384,7 +386,10 @@
             Controls.Add(label3);
             Controls.Add(label2);
             Controls.Add(label1);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            MaximizeBox = false;
             Name = "Form1";
+            SizeGripStyle = SizeGripStyle.Show;
             Text = "試乗レポート管理システム";
             Load += Form1_Load;
             groupBox1.ResumeLayout(false);

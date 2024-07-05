@@ -165,6 +165,11 @@ namespace CarReportSystem {
             if (dgvCarReport.CurrentRow == null) return;
             if (!dgvCarReport.CurrentRow.Selected) return;
 
+            if (cbAuthor.Text == "" || cbCarName.Text == "") {
+                tslbMessage.Text = "‹L˜^ÒA‚Ü‚½‚ÍÔ–¼‚ª–¢“ü—Í‚Å‚·";
+                return;
+            }
+
             listCarReports[dgvCarReport.CurrentRow.Index].Date = dtpDate.Value;
             listCarReports[dgvCarReport.CurrentRow.Index].Author = cbAuthor.Text;
             listCarReports[dgvCarReport.CurrentRow.Index].Maker = GetRadioButtonMaker();
