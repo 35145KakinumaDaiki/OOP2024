@@ -351,6 +351,7 @@
             ssMessageArea.Location = new Point(0, 499);
             ssMessageArea.Name = "ssMessageArea";
             ssMessageArea.Size = new Size(780, 22);
+            ssMessageArea.SizingGrip = false;
             ssMessageArea.TabIndex = 8;
             ssMessageArea.Text = "statusStrip1";
             // 
