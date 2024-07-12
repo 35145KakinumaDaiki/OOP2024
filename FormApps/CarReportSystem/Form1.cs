@@ -14,7 +14,7 @@ namespace CarReportSystem {
         BindingList<CarReport> listCarReports = new BindingList<CarReport>();
 
         //設定クラスのインスタンス作成
-        Settings settings = new Settings();
+        Settings settings = Settings.getInstance();
 
         //コンストラクタ
         public Form1() {
@@ -259,7 +259,7 @@ namespace CarReportSystem {
 
                     }
                 }
-                catch (Exception ex) {
+                catch (Exception) {
                     tslbMessage.Text = "ファイル形式が違います";
 
 
