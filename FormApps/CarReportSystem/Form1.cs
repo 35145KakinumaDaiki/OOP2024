@@ -1,3 +1,6 @@
+using System;
+using System.Reflection;
+using System.Diagnostics;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics.Metrics;
@@ -7,7 +10,7 @@ using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace CarReportSystem {
-    
+
     public partial class Form1 : Form {
 
         //カーレポート管理用リスト
@@ -148,8 +151,9 @@ namespace CarReportSystem {
                     }
                 }
                 catch (Exception) {
-
+                    tslbMessage.Text = "色情報ファイルエラー";
                 }
+
             }
         }
 
@@ -297,16 +301,24 @@ namespace CarReportSystem {
 
         private void Form1_FormClosed(object sender, FormClosedEventArgs e) {
             //設定ファイルのシリアル化
-            try {              
-                using(var writer = XmlWriter.Create("Setting.xml")) {
+            try {
+                using (var writer = XmlWriter.Create("Setting.xml")) {
                     var serializer = new XmlSerializer(settings.GetType());
-                    serializer.Serialize(writer, settings);               
+                    serializer.Serialize(writer, settings);
                 }
             }
             catch (Exception) {
                 MessageBox.Show("設定ファイル書き込みエラー");
-                
+
             }
+        }
+
+        private void このアプリについてToolStripMenuItem_Click(object sender, EventArgs e) {
+            var fmversion = new fmVersion();
+            fmversion.ShowDialog();
+
+
+
         }
     }
 }
