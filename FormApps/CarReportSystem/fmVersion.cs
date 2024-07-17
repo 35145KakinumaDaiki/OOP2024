@@ -26,7 +26,7 @@ namespace CarReportSystem {
             var ver = asm.GetName().Version;
             lbVersion1.Text = "Ver" + ver.Major + "." + ver.Minor + "." + ver.Build + "." + ver.Revision;
 
-            var name = asm.GetName().FullName;
+            
             
             
         }
