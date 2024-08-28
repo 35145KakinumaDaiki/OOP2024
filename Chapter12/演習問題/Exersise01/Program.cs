@@ -95,7 +95,7 @@ namespace Exersise01 {
                 var options = new JsonSerializerOptions {
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                     WriteIndented = true,
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,//キー名のカスタマイズ
                 };
                 string jsonString = JsonSerializer.Serialize(emps, options);
                 Console.WriteLine($"{jsonString}");
