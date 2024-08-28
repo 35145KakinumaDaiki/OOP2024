@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Serialization;
 using System.Runtime.Serialization;
+using System.Text.Json;
+using System.Text.Encodings.Web;
+using System.Text.Unicode;
 
 
 namespace Exersise01 {
@@ -76,6 +79,30 @@ namespace Exersise01 {
         }
 
         private static void Exercise1_4(string file) {
+            var emps = new Employee[] {
+                new Employee {
+                    Id = 123,
+                    Name = "出井　秀幸",
+                    HireDate= new DateTime(2001,3,1),
+                },
+                new Employee {
+                    Id=1,
+                    Name = "長谷部　勇気",
+                    HireDate= new DateTime(1998 ,11,27),
+                }
+            };
+            using (var stream = new FileStream(file,FileMode.Create,FileAccess.Write)) {
+                var options = new JsonSerializerOptions {
+                    Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
+                    WriteIndented = true,
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+                };
+                string jsonString = JsonSerializer.Serialize(emps, options);
+                Console.WriteLine($"{jsonString}");
+
+                var json = JsonSerializer.Serialize(emps, options);
+                
+            }
             
         }
     }
