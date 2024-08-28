@@ -91,7 +91,7 @@ namespace Exersise01 {
                     HireDate= new DateTime(1998 ,11,27),
                 }
             };
-            using (var stream = new FileStream(file,FileMode.Create,FileAccess.Write)) {
+            
                 var options = new JsonSerializerOptions {
                     Encoder = JavaScriptEncoder.Create(UnicodeRanges.All),
                     WriteIndented = true,
@@ -100,9 +100,9 @@ namespace Exersise01 {
                 string jsonString = JsonSerializer.Serialize(emps, options);
                 Console.WriteLine($"{jsonString}");
 
-                var json = JsonSerializer.Serialize(emps, options);
-                
-            }
+                File.WriteAllText(file, jsonString);
+
+            
             
         }
     }
