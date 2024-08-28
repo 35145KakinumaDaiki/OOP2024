@@ -56,12 +56,8 @@ namespace Exersise01 {
                     HireDate= new DateTime(1998 ,11,27),
                 }
             };
-            var settings = new XmlWriterSettings {
-                Encoding = new System.Text.UTF8Encoding(false),
-                Indent = true,
-                IndentChars = "  ",
-            };
-            using(var writer = XmlWriter.Create(outfile, settings)) {
+            
+            using(var writer = XmlWriter.Create(outfile)) {
                 var serializer = new DataContractSerializer(emps.GetType());
                 serializer.WriteObject(writer, emps);
             }
@@ -71,7 +67,7 @@ namespace Exersise01 {
             using(var reader = XmlReader.Create(file)) {
                 var serializer = new DataContractSerializer(typeof(Employee[]));
                 var employee = serializer.ReadObject(reader) as Employee[];
-                foreach (var emp in emps) {
+                foreach (var emp in employee) {
                     Console.WriteLine("{0} {1} {2}",emp.Id,emp.Name,emp.HireDate);
                 }
             }
