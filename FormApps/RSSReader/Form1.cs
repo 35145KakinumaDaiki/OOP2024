@@ -21,10 +21,9 @@ namespace RSSReader {
             using (var wc = new WebClient()) {
                 var url = wc.OpenRead(tbRssUrl.Text);
                 var xdoc = XDocument.Load(url);
-                var xelements = xdoc.Descendants("item").Descendants("title");
-                foreach(var xnovelist in xelements) {
-                    var xtitle = xnovelist.Attribute("title");
-                    lbRssTitle.Items.Add(xnovelist.Value);
+                var xelements = xdoc.Descendants("item").Select(item => item.Element("title").Value);
+                foreach(var title in xelements) {                   
+                    lbRssTitle.Items.Add(title);
                     
                 }
 
