@@ -79,7 +79,7 @@
             this.cbFavorite.Name = "cbFavorite";
             this.cbFavorite.Size = new System.Drawing.Size(404, 20);
             this.cbFavorite.TabIndex = 5;
-           
+            this.cbFavorite.SelectedIndexChanged += new System.EventHandler(this.cbFavorite_SelectedIndexChanged);
             // 
             // tbRssname
             // 
