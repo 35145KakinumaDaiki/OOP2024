@@ -12,5 +12,6 @@ namespace RSSReader {
         public override string ToString() {
             return Name; // コンボボックスに表示するテキスト
         }
+
     }
 }

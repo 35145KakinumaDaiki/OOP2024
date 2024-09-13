@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace SampleEntityFramework.Models {
     public class Author {
-        public int Id { get; set; }
+        public int Id { get; set; }//主キー
         public string Name { get; set; }
         public DateTime Birthday { get; set; }
         public string Gender { get; set; } 
