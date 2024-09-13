@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace SampleEntityFramework {
     internal class Program {
-        static void Main(string[] args) {          
-            AddAuthors();
-            AddBooks();
+        static void Main(string[] args) {
+            //AddAuthors();
+            //AddBooks();
             //DisplayAllBooks();
             //InsertBooks();
+            //DisplayAllBooks2();
 
         }
 
@@ -20,8 +21,10 @@ namespace SampleEntityFramework {
             foreach (var book in books) {
                 Console.WriteLine($"{book.Title}{book.PublishedYear}");
             }
-            Console.ReadLine( );
+            Console.ReadLine();
         }
+
+
         //データ登録
         static void InsertBooks() {
             using (var db = new BooksDbContext()) {
@@ -52,14 +55,14 @@ namespace SampleEntityFramework {
         }
 
         static IEnumerable<Book> GetBooks() {
-            using(var db = new BooksDbContext()) {
+            using (var db = new BooksDbContext()) {
                 return db.Books.//Where(book => book.Author.Name.StartsWith("夏目")).
                                 ToList();
             }
         }
         //著者の追加
         private static void AddAuthors() {
-            using(var db = new BooksDbContext()) {
+            using (var db = new BooksDbContext()) {
                 var author1 = new Author {
                     Birthday = new DateTime(1888, 12, 26),
                     Gender = "M",
@@ -100,7 +103,7 @@ namespace SampleEntityFramework {
                     Author = author2,
                 };
                 db.Books.Add(book2);
-                           
+
                 var author3 = db.Authors.Single(a => a.Name == "菊池寛");
                 var book3 = new Book {
                     Title = "真珠夫人",
@@ -121,19 +124,36 @@ namespace SampleEntityFramework {
         //データの変更
         private static void UpdateBook() {
             using (var db = new BooksDbContext()) {
-                var book = db.Books.Single(x=> x.Title == "銀河鉄道の夜");
+                var book = db.Books.Single(x => x.Title == "銀河鉄道の夜");
                 book.PublishedYear = 2016;
                 db.SaveChanges();
-            } 
+            }
         }
         //データの削除
         private static void DeleteBook() {
-            using(var db = new BooksDbContext()) {
+            using (var db = new BooksDbContext()) {
                 var book = db.Books.SingleOrDefault(x => x.Id == 10);
-                if(book != null) {
+                if (book != null) {
                     db.Books.Remove(book);
                     db.SaveChanges();
                 }
+            }
+        }
+
+        private static void DisplayAllBooks2() {
+            using (var db = new BooksDbContext()) {
+                foreach (var book in db.Books.ToList()) {
+                    Console.WriteLine("{0} {1} {2}({3:yyyy/MM/dd})",
+                        book.Title, book.PublishedYear,
+                        book.Author.Name, book.Author.Birthday
+                    );
+                }
+            }
+        }
+
+        private static void DisplayAllBooks3() {
+            using (var db = new BooksDbContext()) {
+               
             }
         }
     }
