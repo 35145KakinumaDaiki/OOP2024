@@ -24,18 +24,18 @@ namespace RSSReader {
         }
 
         private void btGet_Click(object sender, EventArgs e) {
-            // コンボボックスから選択されたお気に入りアイテムを取得
+           
             var selectedFavorite = cbFavorite.SelectedItem as Class1;
 
             if (selectedFavorite != null) {
-                // 選択されたアイテムの URL を取得
+                
                 string url = selectedFavorite.Url;
 
                 try {
-                    // WebView2 コントロールで URL を表示
+                    
                     webView2.Source = new Uri(url);
 
-                    // URL から RSS フィードを取得し、アイテムリストに追加する場合
+                    
                     using (var wc = new WebClient()) {
                         var xdoc = XDocument.Load(url);
                         items = xdoc.Root.Descendants("item")
@@ -44,7 +44,7 @@ namespace RSSReader {
                                              Link = item.Element("link")?.Value,
                                          }).ToList();
 
-                        lbRssTitle.Items.Clear(); // リストボックスの内容をクリア
+                        lbRssTitle.Items.Clear(); 
                         foreach (var item in items) {
                             lbRssTitle.Items.Add(item.Title);
                         }
@@ -97,8 +97,6 @@ namespace RSSReader {
         private void cbFavorite_SelectedIndexChanged(object sender, EventArgs e) {
             var selectedFavorite = cbFavorite.SelectedItem as Class1;
             if (selectedFavorite != null) {
-                // URL を適切な場所に使用する
-                // 例えば、WebView2 にセットする
                 Uri uri = new Uri(selectedFavorite.Url);
                 webView2.Source = uri;
             }
