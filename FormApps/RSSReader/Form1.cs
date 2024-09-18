@@ -7,6 +7,7 @@ using System.IO;
 using System.Linq;
 using System.Net;
 using System.Reflection.Emit;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -24,39 +25,40 @@ namespace RSSReader {
         }
 
         private void btGet_Click(object sender, EventArgs e) {
-           
             var selectedFavorite = cbFavorite.SelectedItem as Class1;
+            string url;
 
             if (selectedFavorite != null) {
-                
-                string url = selectedFavorite.Url;
+                url = selectedFavorite.Url;
+            } else if (!string.IsNullOrWhiteSpace(cbFavorite.Text)) { 
+                url = cbFavorite.Text; 
+            } else {
+                MessageBox.Show("お気に入り名称か、URLが入力されていません");
+                return;
+            }
 
-                try {
-                    
-                    webView2.Source = new Uri(url);
+            try {
+                webView2.Source = new Uri(url);
 
-                    
-                    using (var wc = new WebClient()) {
-                        var xdoc = XDocument.Load(url);
-                        items = xdoc.Root.Descendants("item")
-                                         .Select(item => new ItemData {
-                                             Title = item.Element("title")?.Value,
-                                             Link = item.Element("link")?.Value,
-                                         }).ToList();
+                using (var wc = new WebClient()) {
+                    var xdoc = XDocument.Load(url);
+                    items = xdoc.Root.Descendants("item")
+                                     .Select(item => new ItemData {
+                                         Title = item.Element("title")?.Value,
+                                         Link = item.Element("link")?.Value,
+                                     }).ToList();
 
-                        lbRssTitle.Items.Clear(); 
-                        foreach (var item in items) {
-                            lbRssTitle.Items.Add(item.Title);
-                        }
+                    lbRssTitle.Items.Clear();
+                    foreach (var item in items) {
+                        lbRssTitle.Items.Add(item.Title);
                     }
                 }
-                catch (Exception ex) {
-                    MessageBox.Show($"エラーが発生しました: {ex.Message}");
-                }
-            } else {
-                MessageBox.Show("お気に入りが選択されていません");
+            }
+            catch (Exception ex) {
+                MessageBox.Show($"エラーが発生しました: {ex.Message}");
             }
         }
+
 
         private void lbRssTitle_SelectedIndexChanged(object sender, EventArgs e) {
             if (lbRssTitle.SelectedIndex >= 0) {
@@ -99,6 +101,21 @@ namespace RSSReader {
             if (selectedFavorite != null) {
                 Uri uri = new Uri(selectedFavorite.Url);
                 webView2.Source = uri;
+            }
+        }
+
+        private void btDelete_Click(object sender, EventArgs e) {
+            var selectedFavorite = cbFavorite.SelectedItem as Class1;
+
+            if (selectedFavorite != null) {
+                var result = MessageBox.Show($"'{selectedFavorite.Name}' を削除しますか？", "削除確認", MessageBoxButtons.YesNo);
+
+                if (result == DialogResult.Yes) {
+                    cbFavorite.Items.Remove(selectedFavorite);
+                    MessageBox.Show("お気に入りが削除されました");
+                }
+            } else {
+                MessageBox.Show("削除するお気に入りが選択されていません");
             }
         }
     }
