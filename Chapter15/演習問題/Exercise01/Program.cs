@@ -1,5 +1,6 @@
 ﻿using Section01;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,14 +49,14 @@ namespace Exercise01 {
         private static void Exercise1_4() {
             var selected = Library.Books.OrderByDescending(b=>b.PublishedYear)
                                         .ThenByDescending(b=>b.Price)
-                                        .Join(Library.Categories,
-                                        book=> book.CategoryId,
+                                        .Join(Library.Categories,//結合する2番目のシーケンス
+                                        book=> book.CategoryId,//対象シーケンスの結合キー
                                         category => category.Id,
                                         (book, category) => new {
-                                            Title = book.Title,
-                                            Price = book.Price,
+                                            book.Title,
+                                            book.Price,
                                             Category = category.Name,
-                                            PublishedYear = book.PublishedYear,
+                                            book.PublishedYear,
                                         });
             foreach (var book in selected) {
                 Console.WriteLine($"{book.PublishedYear}年{book.Price}円{book.Title}({book.Category})");
@@ -63,12 +64,19 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_5() {
-            var category = Library.Books.Where(b=>b.PublishedYear == 2016)
-                                  .
+            var query = Library.Books.Where(b => b.PublishedYear == 2016)
+                                            .Join(Library.Categories, book => book.CategoryId,
+                                             category => category.Id,
+                                            (book, category) => category.Name)
+                                            .Distinct();
+            foreach (var name in query)
+                Console.WriteLine(name); 
+            
+                                  
         }
 
         private static void Exercise1_6() {
-            throw new NotImplementedException();
+            
         }
 
         private static void Exercise1_7() {
