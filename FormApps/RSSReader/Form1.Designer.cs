@@ -76,12 +76,12 @@
             // 
             this.tbRssname.Location = new System.Drawing.Point(84, 62);
             this.tbRssname.Name = "tbRssname";
-            this.tbRssname.Size = new System.Drawing.Size(265, 19);
+            this.tbRssname.Size = new System.Drawing.Size(323, 19);
             this.tbRssname.TabIndex = 6;
             // 
             // btRegist
             // 
-            this.btRegist.Location = new System.Drawing.Point(372, 58);
+            this.btRegist.Location = new System.Drawing.Point(413, 58);
             this.btRegist.Name = "btRegist";
             this.btRegist.Size = new System.Drawing.Size(75, 23);
             this.btRegist.TabIndex = 7;
@@ -92,7 +92,7 @@
             // btDelete
             // 
             this.btDelete.BackColor = System.Drawing.Color.Red;
-            this.btDelete.Location = new System.Drawing.Point(475, 58);
+            this.btDelete.Location = new System.Drawing.Point(494, 58);
             this.btDelete.Name = "btDelete";
             this.btDelete.Size = new System.Drawing.Size(75, 23);
             this.btDelete.TabIndex = 8;
@@ -104,6 +104,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Silver;
             this.ClientSize = new System.Drawing.Size(1289, 816);
             this.Controls.Add(this.btDelete);
             this.Controls.Add(this.btRegist);
@@ -112,6 +113,7 @@
             this.Controls.Add(this.webView2);
             this.Controls.Add(this.lbRssTitle);
             this.Controls.Add(this.btGet);
+            this.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.Name = "Form1";
             this.Text = " ";
             ((System.ComponentModel.ISupportInitialize)(this.webView2)).EndInit();

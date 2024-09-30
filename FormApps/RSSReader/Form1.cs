@@ -118,5 +118,7 @@ namespace RSSReader {
                 MessageBox.Show("削除するお気に入りが選択されていません");
             }
         }
+
+        
     }
 }
