@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Exercise01 {
@@ -76,15 +77,49 @@ namespace Exercise01 {
         }
 
         private static void Exercise1_6() {
-            
+            var groups = Library.Categories
+                                .GroupJoin(Library.Books,
+                                c => c.Id,
+                                b => b.CategoryId,
+                                (c, books) => new { Category = c.Name, Books = books })
+                                .OrderBy(x=> x.Category);
+            foreach(var group in groups) {
+                Console.WriteLine("#{0}",group.Category);
+                foreach(var book in group.Books) {
+                    Console.WriteLine("   {0}",book.Title);
+                }
+            }
+                                
         }
 
         private static void Exercise1_7() {
-            throw new NotImplementedException();
+            var categoriesid = Library.Categories.Single(c=>c.Name == "Development").Id;
+            var query = Library.Books.Where(b => b.CategoryId == categoriesid)
+                                .GroupBy(b => b.PublishedYear)
+                                .OrderBy(b => b.Key);
+            foreach (var group in  query) {
+                Console.WriteLine("#{0}", group.Key);
+                foreach (var item in group) {
+                    Console.WriteLine("   {0}", item.Title);
+                }
+            }
         }
 
         private static void Exercise1_8() {
-            throw new NotImplementedException();
+            var groups = Library.Categories
+                                .GroupJoin(Library.Books,
+                                c => c.Id,
+                                b => b.CategoryId,
+                                (c, book) => new { Category = c.Name, Count = book.Count() })
+                                .Where(b => b.Count >= 4);
+           foreach (var group in groups) {
+                Console.WriteLine("{0} ({1}冊)",group.Category,group.Count);
+            
+            }
+                           
+                                
+            
+
         }
     }
 }
