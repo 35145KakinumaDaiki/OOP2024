@@ -1,0 +1,25 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DistanceConverter {
+    public class DistanceConverter {
+        public ConverterBase From { get; private set; }
+        public ConverterBase To { get; private set; }
+
+        public DistanceConverter(ConverterBase from, ConverterBase to) {
+            From = from;
+            To = to;
+        }
+
+        public double Converter(double value) {
+            var meter = From.ToMeter(value);
+            return To.FromMeter(meter);
+
+        }
+    }
+}
+
