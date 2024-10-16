@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TextNuberSizeChange.Properties {
+namespace LineCounter.Properties {
     using System;
     
     
