@@ -5,9 +5,10 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TextFileProcessor;
+using TextNuberSizeChange.Framework;
 
 namespace TextNuberSizeChange {
-    class ToHankakuProcessor : TextProcessor {
+    class ToHankakuProcessor : ITextFileService {
         private static Dictionary<char, char> _dictionary =
             new Dictionary<char, char>() {
                 {'０','0'},{'１','1'},{'２','2'},{'３','3'},{'４','4'},
@@ -15,7 +16,7 @@ namespace TextNuberSizeChange {
             };
 
       
-        protected override void Execute(string line) {
+        public void Execute(string line) {
             var s = Regex.Replace(line, "[０-９]", c => _dictionary[c.Value[0]].ToString());
             Console.WriteLine(s);
         }

@@ -1,0 +1,54 @@
+﻿<Window x:Class="CollorChecker.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CollorChecker"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="300" Width="700">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label x:Name="colorArea" Margin="10" Background="Black" />
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+
+            </Grid.ColumnDefinitions>
+            <TextBlock HorizontalAlignment="Center"  Grid.Row="0" TextWrapping="Wrap" Text="R" VerticalAlignment="Center" FontSize="30"/>
+            <TextBlock HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" Text="G" VerticalAlignment="Center" FontSize="30"/>
+            <TextBlock HorizontalAlignment="Center"  Grid.Row="2" TextWrapping="Wrap" Text="B" VerticalAlignment="Center" FontSize="30"/>
+            <Slider x:Name="rSlider" Grid.Column="1" HorizontalAlignment="Center" Margin="0,30,0,0" Grid.Row="0" VerticalAlignment="Top" Width="129" Maximum="255"/>
+            <Slider x:Name="gSlider" Grid.Column="1" HorizontalAlignment="Center" Margin="0,30,0,0" Grid.Row="1" VerticalAlignment="Top" Width="129" Maximum="255"/>
+            <Slider x:Name="bSlider" Grid.Column="1" HorizontalAlignment="Center" Margin="0,30,0,0" Grid.Row="2" VerticalAlignment="Top" Width="129" Maximum="255"/>
+            <TextBox x:Name="rValue" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="0" TextWrapping="Wrap" Text="{Binding ElementName=rSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="46" Margin="0,22,0,15" FontSize="20"/>
+            <TextBox x:Name="gValue" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="1" TextWrapping="Wrap" Text="{Binding ElementName=gSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="46" Margin="0,22,0,15" FontSize="20"/>
+            <TextBox x:Name="bValue" Grid.Column="2" HorizontalAlignment="Center"  Grid.Row="2" TextWrapping="Wrap" Text="{Binding ElementName=bSlider,Path=Value,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" Width="46" Margin="0,22,0,15" FontSize="20"/>
+            <ComboBox  Grid.ColumnSpan="3" HorizontalAlignment="Center"  Grid.Row="3" VerticalAlignment="Center" Width="100"/>
+
+
+        </Grid>
+        <Grid Grid.Column="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="5*"/>
+            </Grid.RowDefinitions>
+
+            <Button x:Name="stockButton" Grid.Row="0" Content="STOCK" FontSize="20" Margin="6" Background="Pink"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" Background="#FFFDEBF4"/>
+        </Grid>
+
+    </Grid>
+</Window>
