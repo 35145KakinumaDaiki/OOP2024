@@ -48,7 +48,7 @@
             </Grid.RowDefinitions>
 
             <Button x:Name="stockButton" Grid.Row="0" Content="STOCK" FontSize="20" Margin="6" Background="Pink" Click="stockButton_Click"/>
-            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" Background="#FFFDEBF4"/>
+            <ListBox x:Name="stockList" Grid.Row="1" Margin="10" Background="#FFFDEBF4" FontFamily="BIZ UDGothic" SelectionChanged="stockList_SelectionChanged"/>
         </Grid>
 
     </Grid>

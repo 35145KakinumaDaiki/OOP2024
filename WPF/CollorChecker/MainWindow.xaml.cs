@@ -18,33 +18,30 @@ namespace CollorChecker {
     /// MainWindow.xaml の相互作用ロジック
     /// </summary>
     public partial class MainWindow : Window {
+        MyColor currentColor; //現在設定している色情報
+
         public MainWindow() {
             InitializeComponent();
         }
 
+        //スライドを動かすと呼ばれるイベントハンドラ
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            byte Rvalue = (byte)rSlider.Value;
-            byte Gvalue = (byte)gSlider.Value;
-            byte Bvalue = (byte)bSlider.Value;
-            colorArea.Background = new SolidColorBrush(Color.FromRgb(Rvalue, Gvalue, Bvalue));
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
         }
 
         private void stockButton_Click(object sender, RoutedEventArgs e) {
-            byte Rvalue = (byte)rSlider.Value;
-            byte Gvalue = (byte)gSlider.Value;
-            byte Bvalue = (byte)bSlider.Value;
-
-            MyColor myColor = new MyColor {
-                Color = Color.FromRgb(Rvalue, Gvalue, Bvalue),
-                Name = ToString()
-            };
-
-            
-            stockList.Items.Add(myColor);
-        
-
-
-
+            stockList.Items.Insert(0, currentColor);
         }
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (stockList.SelectedItem is MyColor selectedColor) {
+                colorArea.Background = new SolidColorBrush(selectedColor.Color);
+                rSlider.Value = selectedColor.Color.R;
+                gSlider.Value = selectedColor.Color.G;
+                bSlider.Value = selectedColor.Color.B;
+            }
+        }
+
+        
     }
 }
