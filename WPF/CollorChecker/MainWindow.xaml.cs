@@ -27,40 +27,6 @@ namespace CollorChecker {
             currentColor.Color = Color.FromArgb(255, 0, 0, 0);
             colorSelectComboBox.DataContext = GetColorList();
         }
-
-        //スライドを動かすと呼ばれるイベントハンドラ
-        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
-            colorArea.Background = new SolidColorBrush(currentColor.Color);
-        }
-
-        private void stockButton_Click(object sender, RoutedEventArgs e) {
-
-            bool exists = false;
-            foreach (MyColor item in stockList.Items) {
-                if (item.Color.Equals(currentColor.Color)) {
-                    exists = true;
-                    break;
-                }
-            }
-
-
-            if (!exists) {
-                stockList.Items.Insert(0, currentColor);
-            } else {
-                MessageBox.Show("この色はすでにリストに存在します。");
-            }
-        }
-        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (stockList.SelectedItem is MyColor selectedColor) {
-                colorArea.Background = new SolidColorBrush(selectedColor.Color);
-                rSlider.Value = selectedColor.Color.R;
-                gSlider.Value = selectedColor.Color.G;
-                bSlider.Value = selectedColor.Color.B;
-              
-            }
-        }
-
         /// <summary>
         /// すべての色を取得するメソッド
         /// </summary>
@@ -70,14 +36,38 @@ namespace CollorChecker {
                 .Select(i => new MyColor() { Color = (Color)i.GetValue(null), Name = i.Name }).ToArray();
         }
 
-        private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if(colorSelectComboBox.SelectedItem is MyColor selectedColor) {
-                colorArea.Background = new SolidColorBrush(selectedColor.Color);
-                rSlider.Value = selectedColor.Color.R;
-                gSlider.Value = selectedColor.Color.G;
-                bSlider.Value = selectedColor.Color.B;
-                
+        //スライドを動かすと呼ばれるイベントハンドラ
+        private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+            colorArea.Background = new SolidColorBrush(currentColor.Color);
+        }
+
+        private void stockButton_Click(object sender, RoutedEventArgs e) {
+
+
+            if (!stockList.Items.Contains((MyColor)currentColor)) {
+                stockList.Items.Insert(0,currentColor);
+            } else {
+                MessageBox.Show("既に登録済みです", "ColorCheker", MessageBoxButton.OK, MessageBoxImage.Warning);
             }
+        }
+        private void stockList_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            colorArea.Background = new SolidColorBrush(((MyColor)stockList.Items[stockList.SelectedIndex]).Color);
+
+            selectColor((MyColor)stockList.Items[stockList.SelectedIndex]);
+        }
+
+        private void selectColor(MyColor color) {
+            rSlider.Value = color.Color.R;
+            gSlider.Value = color.Color.G;
+            bSlider.Value = color.Color.B;
+        }
+
+        private void colorSelectComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+           var tempcurrentColor = (MyColor)((ComboBox)sender).SelectedItem;
+            //各スライダーの値を設定する
+            selectColor(tempcurrentColor);
+            currentColor.Name = tempcurrentColor.Name;
         }
     }
 }
