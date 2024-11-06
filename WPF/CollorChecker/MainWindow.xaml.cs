@@ -11,7 +11,7 @@ namespace CollorChecker {
     /// </summary>
     public partial class MainWindow : Window {
         MyColor currentColor; //現在設定している色情報
-
+        
         public MainWindow() {
             InitializeComponent();
             //αチャンネルの初期値を設定（起動時すぐにストックボタンが押された場合の対応）
@@ -30,6 +30,7 @@ namespace CollorChecker {
         //スライドを動かすと呼ばれるイベントハンドラ
         private void Slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             currentColor.Color = Color.FromRgb((byte)rSlider.Value, (byte)gSlider.Value, (byte)bSlider.Value);
+
             currentColor.Name = GetColorList()
                                 .Where(c => c.Color.R == (byte)rSlider.Value &&
                                             c.Color.G == (byte)gSlider.Value &&
