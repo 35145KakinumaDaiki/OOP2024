@@ -4,6 +4,6 @@
              xmlns:local="clr-namespace:VisibilityConveter"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <ResourceDictionary Source="Resources.xaml"/>
     </Application.Resources>
 </Application>
