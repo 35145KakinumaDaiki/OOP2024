@@ -20,10 +20,10 @@ namespace CustomerApp.Objects {
         /// <summary>
         /// 住所
         /// </summary>
-        public string Addres {  get; set; }
+        public string Address {  get; set; }
 
         public override string ToString() {
-            return $"{Id}   {Name}   {Phone}  {Addres}";
+            return $"{Id}   {Name}   {Phone}  {Address}";
         }
     }
 }
