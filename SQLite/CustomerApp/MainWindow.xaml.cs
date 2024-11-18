@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Win32;
 
 namespace CustomerApp {
     /// <summary>
@@ -103,9 +104,8 @@ namespace CustomerApp {
             }
         }
 
-        private void OpenButton_Click(object sender, RoutedEventArgs e) {
-
-        }
+       
+       
     }
 }
  
