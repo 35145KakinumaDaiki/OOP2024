@@ -33,17 +33,34 @@ namespace CustomerApp {
                 Address = AddressTextBox.Text,
             };
 
-           
 
-            using(var connection = new SQLiteConnection(App.databasePass)) {
+
+            using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
             ReadDatabase();//ListView表示
         }
 
-        private void ReadButton_Click(object sender, RoutedEventArgs e) {
+        private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             //ReadDatabase();
+            var selectedCustomer = CustomerListView.SelectedItem as Customer;
+            if (selectedCustomer == null) {
+                MessageBox.Show("更新する顧客を選択してください");
+                return;
+            }
+
+            
+            selectedCustomer.Name = NameTextBox.Text;
+            selectedCustomer.Phone = PhoneTextBox.Text;
+            selectedCustomer.Address = AddressTextBox.Text;
+
+            using (var connection = new SQLiteConnection(App.databasePass)) {
+                connection.CreateTable<Customer>();
+                connection.Update(selectedCustomer); 
+            }
+
+            ReadDatabase(); 
         }
         //ListView表示
         private void ReadDatabase() {
@@ -57,14 +74,14 @@ namespace CustomerApp {
         }
 
         private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e) {
-            var filterList = _customers.Where(x=>x.Name.Contains(SearchTextBox.Text)).ToList();
+            var filterList = _customers.Where(x => x.Name.Contains(SearchTextBox.Text)).ToList();
             CustomerListView.ItemsSource = filterList;
 
         }
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e) {
             var item = CustomerListView.SelectedItem as Customer;
-            if(item == null) {
+            if (item == null) {
                 MessageBox.Show("削除する行を選択してください");
                 return;
             }
@@ -75,6 +92,18 @@ namespace CustomerApp {
                 ReadDatabase();
 
             }
+
+        }
+        private void CustomerListView_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            var selectedCustomer = CustomerListView.SelectedItem as Customer;
+            if (selectedCustomer != null) {
+                NameTextBox.Text = selectedCustomer.Name;
+                PhoneTextBox.Text = selectedCustomer.Phone;
+                AddressTextBox.Text = selectedCustomer.Address;
+            }
+        }
+
+        private void OpenButton_Click(object sender, RoutedEventArgs e) {
 
         }
     }
