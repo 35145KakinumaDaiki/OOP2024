@@ -21,9 +21,13 @@ namespace CustomerApp.Objects {
         /// 住所
         /// </summary>
         public string Address {  get; set; }
+        /// <summary>
+        /// 画像
+        /// </summary>
+        public string ImagePath { get; set; }
 
         public override string ToString() {
-            return $"{Id}   {Name}   {Phone}  {Address}";
+            return $"{Id}   {Name}   {Phone}  {Address} ";
         }
     }
 }

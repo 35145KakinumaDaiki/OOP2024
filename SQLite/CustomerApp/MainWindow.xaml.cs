@@ -7,10 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
@@ -32,8 +28,8 @@ namespace CustomerApp {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
+                ImagePath = (CustomerListView.SelectedItem as Customer)?.ImagePath
             };
-
 
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
@@ -51,24 +47,24 @@ namespace CustomerApp {
                 return;
             }
 
-            
+
             selectedCustomer.Name = NameTextBox.Text;
             selectedCustomer.Phone = PhoneTextBox.Text;
             selectedCustomer.Address = AddressTextBox.Text;
 
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
-                connection.Update(selectedCustomer); 
+                connection.Update(selectedCustomer);
             }
 
-            ReadDatabase(); 
+            ReadDatabase();
         }
         //ListView表示
         private void ReadDatabase() {
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 _customers = connection.Table<Customer>().ToList();
-
+                
                 CustomerListView.ItemsSource = _customers;
 
             }
@@ -102,10 +98,35 @@ namespace CustomerApp {
                 PhoneTextBox.Text = selectedCustomer.Phone;
                 AddressTextBox.Text = selectedCustomer.Address;
             }
+                if (!string.IsNullOrEmpty(selectedCustomer.ImagePath)) {
+                    CustomerImage.Source = new BitmapImage(new Uri(selectedCustomer.ImagePath));
+                } else {
+                    // 画像パスが空の場合は、デフォルトの画像を表示することもできます
+                    CustomerImage.Source = null;  // 画像が設定されていない場合
+                }
+
+
+            }
+
+        private void OpenImageButton_Click(object sender, RoutedEventArgs e) {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Image Files|*.jpg;*.jpeg;*.png;*.bmp;*.gif";
+
+            if (openFileDialog.ShowDialog() == true) {
+               
+                string imagePath = openFileDialog.FileName;
+             
+                CustomerImage.Source = new BitmapImage(new Uri(imagePath));
+                
+                var selectedCustomer = CustomerListView.SelectedItem as Customer;
+                if (selectedCustomer != null) {
+                    selectedCustomer.ImagePath = imagePath;
+                }
+            }
         }
 
-       
-       
+
+
     }
 }
  
