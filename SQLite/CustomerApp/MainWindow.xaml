@@ -13,7 +13,6 @@
                     <RowDefinition/>
                     <RowDefinition/>
                     <RowDefinition/>
-                    <RowDefinition/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="2*"/>
@@ -28,47 +27,82 @@
 
                 <TextBlock Text="住所" Grid.Row="2" Grid.Column="0" VerticalAlignment="Center"/>
                 <TextBox x:Name="AddressTextBox" Grid.Row="2" Grid.Column="1" Margin="2"/>
-
-
-
             </Grid>
 
-
-
-            <Button Content="Save" x:Name="SaveButton" Click="SaveButton_Click" Margin="2"/>
+            <Button Content="Regist" x:Name="SaveButton" Click="SaveButton_Click" Margin="2"/>
             <Button Content="Delete" x:Name="DeleteButton" Click="DeleteButton_Click" Margin="2"/>
             <Button Content="Update" x:Name="UpdateButton" Click="UpdateButton_Click" Margin="2"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Margin="2">
+                <Button Content="OpenImage" x:Name="OpenImageButton" Click="OpenImageButton_Click" Width="233" Height="30" Margin="2"/>
+                <Button Content="Clear" x:Name="ClearButton" Click="ClearButton_Click" Width="235" Height="30" Margin="2"/>
+            </StackPanel>
 
             <TextBox x:Name="SearchTextBox" FontSize="20" TextChanged="SearchTextBox_TextChanged" />
 
             <Grid>
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <!-- 画像の表示エリア -->
                 </Grid.ColumnDefinitions>
 
-                <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="300"  SelectionChanged="CustomerListView_SelectionChanged">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock Text="{Binding Id}"/>
-                                <TextBlock Text="{Binding Name}" FontSize="20"/>
-                                <TextBlock Text="{Binding Phone}" Foreground="Blue"/>
-                                <TextBlock Text="{Binding Address}" Foreground="Green" />
-                                
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    
+                <ListView x:Name="CustomerListView" Margin="0,5,0,0" Height="500" VerticalAlignment="Stretch" SelectionChanged="CustomerListView_SelectionChanged">
+                    <ListView.View>
+                        <GridView>
+                            <!-- ID列 -->
+                            <GridViewColumn Header="ID" DisplayMemberBinding="{Binding Id}" Width="80">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Id}" FontSize="16"  FontWeight="Bold"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <!-- 名前列 -->
+                            <GridViewColumn Header="名前" DisplayMemberBinding="{Binding Name}" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Name}" FontSize="16"  FontWeight="Bold"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <!-- 電話番号列 -->
+                            <GridViewColumn Header="電話番号" DisplayMemberBinding="{Binding Phone}" Width="200">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Phone}" FontSize="16" FontWeight="Bold"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <!-- 住所列 -->
+                            <GridViewColumn Header="住所" DisplayMemberBinding="{Binding Address}" Width="250">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Address}" FontSize="16" FontWeight="Bold" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <!-- 画像列 -->
+                            <GridViewColumn Header="画像" Width="300">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+
+                                        <Image Source="{Binding ImagePath}" Height="100" Width="200" />
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
                 </ListView>
 
-                <StackPanel Grid.Column="1" Margin="10">
-                    <TextBlock Text="選択した画像" FontSize="16" HorizontalAlignment="Center"/>
-                    <Image x:Name="CustomerImage" Height="200" Width="200" RenderTransformOrigin="0.538,0.545"/>
-                    <Button Content="開く" x:Name="OpenImageButton" Click="OpenImageButton_Click" Width="80"  Margin="5"/>
+                <StackPanel Grid.Column="1" VerticalAlignment="Stretch" Margin="10,10,10,32">
+                    <Image x:Name="CustomerImage" Height="52" Width="67" RenderTransformOrigin="0.538,0.545" />
                 </StackPanel>
             </Grid>
         </StackPanel>
-
     </Grid>
 </Window>
