@@ -8,6 +8,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using Microsoft.Win32;
+using System.Data.Odbc;
 
 namespace CustomerApp {
     public partial class MainWindow : Window {
@@ -20,25 +21,40 @@ namespace CustomerApp {
         }
 
         private void SaveButton_Click(object sender, RoutedEventArgs e) {
-            
+
             if (string.IsNullOrWhiteSpace(NameTextBox.Text)) {
                 MessageBox.Show("名前を入力してください", "入力エラー", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+                return; // 処理を中止
             }
 
+            // 顧客データの作成
             var customer = new Customer() {
                 Name = NameTextBox.Text,
                 Phone = PhoneTextBox.Text,
                 Address = AddressTextBox.Text,
-                ImageData = _selectedImageData  // 保存する画像データ
+                ImageData = _selectedImageData  // 画像のバイト配列を設定
             };
 
+            // SQLiteに保存
             using (var connection = new SQLiteConnection(App.databasePass)) {
                 connection.CreateTable<Customer>();
                 connection.Insert(customer);
             }
+            MessageBox.Show("顧客情報を追加しました");
+            // 顧客リストを更新
+            ReadDatabase();
 
-            ReadDatabase();  // 顧客データを再読み込みしてリストビューを更新
+            // 入力フィールドと画像をクリア
+            ClearForm();
+        }
+
+        private void ClearForm() {
+            // 名前、電話番号、住所、画像のクリア
+            NameTextBox.Clear();
+            PhoneTextBox.Clear();
+            AddressTextBox.Clear();
+            CustomerImage.Source = null;  // 画像表示のクリア
+            _selectedImageData = null;   // 画像データのクリア
         }
 
         private void ReadDatabase() {
